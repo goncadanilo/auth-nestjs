@@ -6,7 +6,7 @@ import { Users } from '../../src/modules/users/entity/users.entity';
 import { UsersService } from '../../src/modules/users/service/users.service';
 import { TestUtil } from '../utils/test.uttil';
 
-describe('Products (e2e)', () => {
+describe('Users (e2e)', () => {
   let app: INestApplication;
   let mockUser: Users;
 
