@@ -17,4 +17,8 @@ export class UsersService {
     user.password = hashSync(user.password, 8);
     return await this.repository.save(user);
   }
+
+  async findUserByEmail(email: string): Promise<Users> {
+    return await this.repository.findOne({ email });
+  }
 }
