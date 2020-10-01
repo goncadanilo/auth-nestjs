@@ -11,6 +11,7 @@ describe('UsersService', () => {
   const mockRepository = {
     create: jest.fn(),
     save: jest.fn(),
+    findOne: jest.fn(),
   };
 
   beforeAll(async () => {
@@ -28,6 +29,7 @@ describe('UsersService', () => {
   beforeEach(() => {
     mockRepository.create.mockReset();
     mockRepository.save.mockReset();
+    mockRepository.findOne.mockReset();
   });
 
   it('should be defined', () => {
@@ -53,6 +55,18 @@ describe('UsersService', () => {
       expect(mockRepository.save).toBeCalledWith(mockUser);
       expect(mockRepository.create).toBeCalledTimes(1);
       expect(mockRepository.save).toBeCalledTimes(1);
+    });
+  });
+
+  describe('when search a user by email', () => {
+    it('should find a user by email', async () => {
+      mockRepository.findOne.mockReturnValue(mockUser);
+
+      const userFound = await service.findUserByEmail(mockUser.email);
+
+      expect(userFound).toMatchObject(mockUser);
+      expect(mockRepository.findOne).toBeCalledWith({ email: mockUser.email });
+      expect(mockRepository.findOne).toBeCalledTimes(1);
     });
   });
 });
