@@ -6,7 +6,7 @@ import { UsersService } from '../../users/service/users.service';
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
-  let service: AuthService;
+  let authSservice: AuthService;
   let mockUser: Users;
 
   const mockUsersService = {
@@ -18,7 +18,7 @@ describe('AuthService', () => {
   };
 
   beforeAll(async () => {
-    const module: TestingModule = await Test.createTestingModule({
+    const moduleRef: TestingModule = await Test.createTestingModule({
       providers: [
         AuthService,
         { provide: UsersService, useValue: mockUsersService },
@@ -26,7 +26,7 @@ describe('AuthService', () => {
       ],
     }).compile();
 
-    service = module.get<AuthService>(AuthService);
+    authSservice = moduleRef.get<AuthService>(AuthService);
     mockUser = TestUtil.getMockUser();
   });
 
@@ -36,7 +36,7 @@ describe('AuthService', () => {
   });
 
   it('should be defined', () => {
-    expect(service).toBeDefined();
+    expect(authSservice).toBeDefined();
   });
 
   describe('when validate user', () => {
@@ -44,7 +44,7 @@ describe('AuthService', () => {
       mockUsersService.findUserByEmail.mockReturnValue(mockUser);
       mockCryptoService.compareHash.mockReturnValue(true);
 
-      const result = await service.validateUser(
+      const result = await authSservice.validateUser(
         mockUser.email,
         mockUser.password,
       );
@@ -63,7 +63,7 @@ describe('AuthService', () => {
       mockUsersService.findUserByEmail.mockReturnValue(null);
       mockCryptoService.compareHash.mockReturnValue(false);
 
-      const result = await service.validateUser(
+      const result = await authSservice.validateUser(
         mockUser.email,
         mockUser.password,
       );

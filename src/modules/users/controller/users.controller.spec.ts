@@ -5,7 +5,7 @@ import { UsersService } from '../service/users.service';
 import { UsersController } from './users.controller';
 
 describe('UsersController', () => {
-  let controller: UsersController;
+  let usersController: UsersController;
   let mockUser: Users;
 
   const mockUsersService = {
@@ -13,12 +13,12 @@ describe('UsersController', () => {
   };
 
   beforeAll(async () => {
-    const module: TestingModule = await Test.createTestingModule({
+    const moduleRef: TestingModule = await Test.createTestingModule({
       controllers: [UsersController],
       providers: [{ provide: UsersService, useValue: mockUsersService }],
     }).compile();
 
-    controller = module.get<UsersController>(UsersController);
+    usersController = moduleRef.get<UsersController>(UsersController);
     mockUser = TestUtil.getMockUser();
   });
 
@@ -27,7 +27,7 @@ describe('UsersController', () => {
   });
 
   it('should be defined', () => {
-    expect(controller).toBeDefined();
+    expect(usersController).toBeDefined();
   });
 
   describe('when create a user', () => {
@@ -40,7 +40,7 @@ describe('UsersController', () => {
         password: mockUser.password,
       };
 
-      const createdUser = await controller.createUser(user);
+      const createdUser = await usersController.createUser(user);
 
       expect(createdUser).toMatchObject(mockUser);
       expect(mockUsersService.createUser).toBeCalledWith(user);
