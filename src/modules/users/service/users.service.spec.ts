@@ -1,3 +1,4 @@
+import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { TestUtil } from '../../../../test/utils/test.uttil';
@@ -13,6 +14,7 @@ describe('UsersService', () => {
     create: jest.fn(),
     save: jest.fn(),
     findOne: jest.fn(),
+    update: jest.fn(),
   };
 
   const mockCryptoService = {
@@ -36,6 +38,7 @@ describe('UsersService', () => {
     mockRepository.create.mockReset();
     mockRepository.save.mockReset();
     mockRepository.findOne.mockReset();
+    mockRepository.update.mockReset();
     mockCryptoService.generateHash.mockReset();
   });
 
@@ -77,6 +80,55 @@ describe('UsersService', () => {
       expect(userFound).toMatchObject(mockUser);
       expect(mockRepository.findOne).toBeCalledWith({ email: mockUser.email });
       expect(mockRepository.findOne).toBeCalledTimes(1);
+    });
+  });
+
+  describe('when update a user', () => {
+    it('should update a existing user', async () => {
+      const userEmailUpdate = {
+        email: 'update@email.com',
+      };
+
+      mockRepository.findOne.mockReturnValue(mockUser);
+      mockRepository.update.mockReturnValue({
+        ...mockUser,
+        ...userEmailUpdate,
+      });
+      mockRepository.create.mockReturnValue({
+        ...mockUser,
+        ...userEmailUpdate,
+      });
+
+      const updatedProduct = await usersService.updateUser(
+        '1',
+        userEmailUpdate,
+      );
+
+      expect(updatedProduct).toMatchObject(userEmailUpdate);
+      expect(mockRepository.findOne).toBeCalledWith('1');
+      expect(mockRepository.findOne).toBeCalledTimes(1);
+      expect(mockRepository.update).toBeCalledWith('1', userEmailUpdate);
+      expect(mockRepository.update).toBeCalledTimes(1);
+      expect(mockRepository.create).toBeCalledWith({
+        ...mockUser,
+        ...userEmailUpdate,
+      });
+      expect(mockRepository.create).toBeCalledTimes(1);
+    });
+
+    it('should return a exception when does not to find a user', async () => {
+      mockRepository.findOne.mockReturnValue(null);
+
+      const userEmailUpdate = {
+        email: 'update@email.com',
+      };
+
+      await usersService.updateUser('3', userEmailUpdate).catch(error => {
+        expect(error).toBeInstanceOf(NotFoundException);
+        expect(error).toMatchObject({ message: 'User not found' });
+        expect(mockRepository.findOne).toBeCalledWith('3');
+        expect(mockRepository.findOne).toBeCalledTimes(1);
+      });
     });
   });
 });
