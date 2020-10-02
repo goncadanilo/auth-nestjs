@@ -78,11 +78,7 @@ describe('AuthService', () => {
       expect(result).toBe(null);
       expect(mockUsersService.findUserByEmail).toBeCalledWith(mockUser.email);
       expect(mockUsersService.findUserByEmail).toBeCalledTimes(1);
-      expect(mockCryptoService.compareHash).toBeCalledWith(
-        mockUser.password,
-        undefined,
-      );
-      expect(mockCryptoService.compareHash).toBeCalledTimes(1);
+      expect(mockCryptoService.compareHash).toBeCalledTimes(0);
     });
   });
 

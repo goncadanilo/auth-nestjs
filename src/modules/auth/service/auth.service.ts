@@ -13,10 +13,8 @@ export class AuthService {
 
   async validateUser(email: string, password: string) {
     const user = await this.usersService.findUserByEmail(email);
-    const correctPassword = await this.cryptoService.compareHash(
-      password,
-      user?.password,
-    );
+    const correctPassword =
+      user && (await this.cryptoService.compareHash(password, user.password));
 
     if (correctPassword) {
       return { id: user.id, email: user.email };
