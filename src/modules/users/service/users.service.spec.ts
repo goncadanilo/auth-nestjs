@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { TestUtil } from '../../../../test/utils/test.uttil';
+import { CryptoService } from '../../../shared/services/crypto.service';
 import { Users } from '../entity/users.entity';
 import { UsersService } from './users.service';
 
@@ -14,11 +15,16 @@ describe('UsersService', () => {
     findOne: jest.fn(),
   };
 
+  const mockCryptoService = {
+    generateHash: jest.fn(),
+  };
+
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         UsersService,
         { provide: getRepositoryToken(Users), useValue: mockRepository },
+        { provide: CryptoService, useValue: mockCryptoService },
       ],
     }).compile();
 
@@ -30,6 +36,7 @@ describe('UsersService', () => {
     mockRepository.create.mockReset();
     mockRepository.save.mockReset();
     mockRepository.findOne.mockReset();
+    mockCryptoService.generateHash.mockReset();
   });
 
   it('should be defined', () => {
@@ -40,6 +47,7 @@ describe('UsersService', () => {
     it('should be create a user', async () => {
       mockRepository.create.mockReturnValue(mockUser);
       mockRepository.save.mockReturnValue(mockUser);
+      mockCryptoService.generateHash.mockReturnValue(mockUser.password);
 
       const user = {
         name: mockUser.name,
@@ -52,8 +60,10 @@ describe('UsersService', () => {
       expect(savedUser).toHaveProperty('id', 1);
       expect(savedUser).toMatchObject(mockUser);
       expect(mockRepository.create).toBeCalledWith(user);
-      expect(mockRepository.save).toBeCalledWith(mockUser);
       expect(mockRepository.create).toBeCalledTimes(1);
+      expect(mockCryptoService.generateHash).toBeCalledWith(mockUser.password);
+      expect(mockCryptoService.generateHash).toBeCalledTimes(1);
+      expect(mockRepository.save).toBeCalledWith(mockUser);
       expect(mockRepository.save).toBeCalledTimes(1);
     });
   });
