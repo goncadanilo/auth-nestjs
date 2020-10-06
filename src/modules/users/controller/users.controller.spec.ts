@@ -10,6 +10,7 @@ describe('UsersController', () => {
 
   const mockUsersService = {
     createUser: jest.fn(),
+    updateUser: jest.fn(),
   };
 
   beforeAll(async () => {
@@ -24,6 +25,7 @@ describe('UsersController', () => {
 
   beforeEach(() => {
     mockUsersService.createUser.mockReset();
+    mockUsersService.updateUser.mockReset();
   });
 
   it('should be defined', () => {
@@ -45,6 +47,34 @@ describe('UsersController', () => {
       expect(createdUser).toMatchObject(mockUser);
       expect(mockUsersService.createUser).toBeCalledWith(user);
       expect(mockUsersService.createUser).toBeCalledTimes(1);
+    });
+  });
+
+  describe('when update a user', () => {
+    it('should update a existing user and return it', async () => {
+      const userEmailUpdate = {
+        email: 'update@email.com',
+      };
+
+      const req = {
+        user: {
+          id: '1',
+        },
+      };
+
+      mockUsersService.updateUser.mockReturnValue({
+        ...mockUser,
+        ...userEmailUpdate,
+      });
+
+      const updatedProduct = await usersController.updateUser(
+        req,
+        userEmailUpdate,
+      );
+
+      expect(updatedProduct).toMatchObject(userEmailUpdate);
+      expect(mockUsersService.updateUser).toBeCalledWith('1', userEmailUpdate);
+      expect(mockUsersService.updateUser).toBeCalledTimes(1);
     });
   });
 });
