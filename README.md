@@ -1,75 +1,88 @@
+<h1 align="center">
+  🔐 Auth NestJS - JWT
+</h1>
+
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/goncadanilo/auth-nestjs.svg">
+
+  <a href="https://github.com/goncadanilo/auth-nestjs/commits/master">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/goncadanilo/auth-nestjs.svg">
+  </a>
+
+  <a href="https://github.com/goncadanilo/auth-nestjs/issues">
+    <img alt="Repository issues" src="https://img.shields.io/github/issues/goncadanilo/auth-nestjs.svg">
+  </a>
+
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen">
+
+  <a href="https://github.com/goncadanilo/">
+    <img alt="Author" src="https://img.shields.io/badge/author-Danilo%20Gon%C3%A7alves-blue">
+  </a>
 </p>
 
-[travis-image]: https://api.travis-ci.org/nestjs/nest.svg?branch=master
-[travis-url]: https://travis-ci.org/nestjs/nest
-[linux-image]: https://img.shields.io/travis/nestjs/nest/master.svg?label=linux
-[linux-url]: https://travis-ci.org/nestjs/nest
-  
-  <p align="center">A progressive <a href="http://nodejs.org" target="blank">Node.js</a> framework for building efficient and scalable server-side applications, heavily inspired by <a href="https://angular.io" target="blank">Angular</a>.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/dm/@nestjs/core.svg" alt="NPM Downloads" /></a>
-<a href="https://travis-ci.org/nestjs/nest"><img src="https://api.travis-ci.org/nestjs/nest.svg?branch=master" alt="Travis" /></a>
-<a href="https://travis-ci.org/nestjs/nest"><img src="https://img.shields.io/travis/nestjs/nest/master.svg?label=linux" alt="Linux" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#5" alt="Coverage" /></a>
-<a href="https://gitter.im/nestjs/nestjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge"><img src="https://badges.gitter.im/nestjs/nestjs.svg" alt="Gitter" /></a>
-<a href="https://opencollective.com/nest#backer"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec"><img src="https://img.shields.io/badge/Donate-PayPal-dc3d53.svg"/></a>
-  <a href="https://twitter.com/nestframework"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
+<p align="center">
+  <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-como-rodar">Como rodar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-licença">Licença</a>
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+<br>
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+<p align="center">
+  <img alt="Auth NestJS" src=".github/banner-auth-nestjs.png" width="80%">
+</p>
 
-## Installation
+## 🚀 Tecnologias
 
-```bash
-$ npm install
-```
+Esse projeto foi desenvolvido com as seguintes tecnologias:
 
-## Running the app
+- [NestJS](https://nestjs.com/): framework utilizado para criação da aplicação.
+- [JWT](https://jwt.io/): utilizado para gerar o token de autenticação.
+- [Postgres](https://www.postgresql.org/): banco SQL utilizado para armazenar os dados.
+- [Docker](https://www.docker.com/) e [Docker-compose](https://docs.docker.com/compose/install/): utilizado para criar e rodar o container do banco de dados.
+- [Jest](https://jestjs.io/): utilizado para escrever os testes da aplicação.
+- [Swagger](https://swagger.io/): utilizado para documentar a aplicação.
 
-```bash
-# development
-$ npm run start
+## 💻 Projeto
 
-# watch mode
-$ npm run start:dev
+Esse projeto é um sistema de autenticação desenvolvido para fins de estudo utilizando o framework [NestJS](https://nestjs.com/). A aplicação consiste no cadastro, autenticação e atualização do usuário. Lembrando que para conseguir atulizar os seus dados, o usuário deve estar autenticado.
 
-# production mode
-$ npm run start:prod
-```
+## ⚡ Como rodar
 
-## Test
+### Requisitos
 
-```bash
-# unit tests
-$ npm run test
+- [Node.js](https://nodejs.org/en/).
+- [NestJS CLI](https://docs.nestjs.com/first-steps).
+- [Yarn](https://yarnpkg.com/) ou se preferir, pode usar o npm _(já vem com o node)_.
+- [Docker](https://www.docker.com/) e [Docker-compose](https://docs.docker.com/compose/install/) _(opcional)_.
 
-# e2e tests
-$ npm run test:e2e
+### Subir o banco
 
-# test coverage
-$ npm run test:cov
-```
+- crie uma cópia do `.env.example` como `.env` e defina suas variáveis do banco.
+- suba o banco de dados com docker: `docker-compose up -d`.
 
-## Support
+_(se você não estiver usando o docker, é necessário criar o banco manualmente)_.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- rode as migrations: `yarn typeorm migration:run`.
 
-## Stay in touch
+### Rodar a aplicação
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- para rodar a aplicação: `yarn start`.
+- para rodar a aplicação em modo watch: `yarn start:dev`.
+- a aplicação estará disponível no endereço: `http://localhost:3000`.
+- a documentação estará disponível no endereço: `http://localhost:3000/api`.
 
-## License
+### Rodar os testes
 
-  Nest is [MIT licensed](LICENSE).
+- para rodar os testes unitários: `yarn test`.
+- para ver a cobertura dos testes unitários: `yarn test:cov`.
+- para rodar os testes e2e: `yarn test:e2e`
+
+## 📝 Licença
+
+Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
+
+---
+
+Feito com ♥ by [Danilo Gonçalves](https://github.com/goncadanilo). Me adicione no [LinkedIn](https://www.linkedin.com/in/goncadanilo/) :wave:
