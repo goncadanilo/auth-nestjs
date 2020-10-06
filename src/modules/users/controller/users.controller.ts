@@ -47,6 +47,7 @@ export class UsersController {
   @Put()
   @HttpCode(HttpStatus.OK)
   @UseGuards(JwtAuthGuard)
+  @UseInterceptors(ClassSerializerInterceptor)
   @ApiOperation({ summary: 'Update a user' })
   @ApiOkResponse({ type: UsersResponse, description: 'Updated user' })
   @ApiNotFoundResponse({ type: ErrorResponse, description: 'Not Found' })
